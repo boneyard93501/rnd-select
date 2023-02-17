@@ -1,0 +1,16 @@
+[package]
+name = "rand_utilities"
+version = "0.1.0"
+edition = "2018"
+
+[[bin]]
+name = "rand_utilities"
+path = "src/main.rs"
+
+[dependencies]
+marine-rs-sdk = "0.7.1"
+tinyrand = "0.5.0"
+serde_json = "1.0.93"
+
+[dev-dependencies]
+marine-rs-sdk-test = "0.8.1"

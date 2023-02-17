@@ -1,0 +1,6 @@
+modules_dir = "../services/modules/rand_utils/target/wasm32-wasi/release/"
+
+[[module]]
+name = "rand_utilities"
+max_heap_size = "512 KiB"
+logger_enabled = true
