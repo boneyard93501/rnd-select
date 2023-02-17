@@ -1,0 +1,33 @@
+aqua Main
+
+import App from "deployed.app.aqua"
+import RandUtilities, RandResult from "services/rand_utilities.aqua"
+export App, RandUtilities
+
+
+data Item:
+    item: string
+
+service ParseToItem("json"):
+    parse(s:string) -> Item
+
+
+-- simulate round robin selection from registry/subnet servicea
+-- not slection state just randomness to determine selection
+-- in the case of fRPC, the seed can come from the self-hosted gateway ,e.g.,
+-- timestamp as u64 epoch, without much risk. For verifiable randomness see [VRFun](https://github.com/fluencelabs/examples/tree/main/aqua-examples/vrfun)
+-- or [Drand](https://github.com/fluencelabs/examples/tree/main/aqua-examples/drand)
+func round_robin_service_selector(subnet_service_ids: []string, seed: u64) -> string:
+    services <- App.services()
+    -- all the registr/subnetwork service enumeration might go  here
+    on services.rand_utilities.default!.peerId:
+        RandUtilities services.rand_utilities.default!.serviceId
+        res <-  RandUtilities.item_from_vec(subnet_service_ids, seed)
+        -- do some error checking here
+        obj <- ParseToItem.parse(res.stdout)
+        -- do something with the chosen id
+    <- obj.item -- just for the heck of it
+
+-- faiover without a while loop or at least break statement is fundamentally impossible to do
+--func basic_failover(subnet_service_ids: []string):
+
