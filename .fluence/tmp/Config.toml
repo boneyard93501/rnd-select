@@ -1,0 +1,3 @@
+[[module]]
+name = "rand_utilities"
+load_from = "/Users/bebo/localdev/rand-utils/services/modules/rand_utilities/target/wasm32-wasi/release/rand_utilities.wasm"

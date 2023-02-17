@@ -1,0 +1,9 @@
+module RandUtilities declares *
+
+data RandResult:
+  stdout: string
+  stderr: string
+
+service RandUtilities:
+  idx_from_range(lower: u32, upper: u32, seed: u64) -> RandResult
+  item_from_vec(items: []string, seed: u64) -> RandResult
